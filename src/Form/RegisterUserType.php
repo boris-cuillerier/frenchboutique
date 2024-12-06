@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,11 +23,27 @@ class RegisterUserType extends AbstractType
                     'placeholder' => 'prenom.nom@domaine.fr'
                 ]
             ])
-            ->add('password', PasswordType::class, [
-                'label' => 'Mot de passe',
-                'attr' => [
-                    'placeholder' => 'Indiquez le mot de mot de passe'
-                ]
+            /*
+                plainPassword n'est lié à aucune entité, cela n'existe pas dans la table,
+                du coup on passe le paramètre mapped à false sinon Symfony ne va rien comprendre,
+                le mapping se fait via la propriété hash_property_path
+            */
+            ->add('plainPassword', RepeatedType::class, [
+                'type'=> PasswordType::class,
+                'first_options'  => [
+                    'label' => 'Votre mot de passe',
+                    'attr' => [
+                        'placeholder' => 'Indiquez le mot de mot de passe'
+                    ],
+                    'hash_property_path' => 'password'
+                ],
+                'second_options' => [
+                    'label' => 'Confirmez le mot de passe',
+                    'attr' => [
+                        'placeholder' => 'Confirmez le mot de mot de passe'
+                    ]
+                ],
+                'mapped' => false,
             ])
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
