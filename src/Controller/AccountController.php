@@ -32,8 +32,13 @@ class AccountController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             // On ne persiste pas car l'objet existe déjà, on peut flusher direct
             $entityManager->flush();
+
+             // Le type de l'alerte est l'un des types BootStrap habituels
+             $this->addFlash('success','Modification effectuée');
+
         }
 
         return $this->render('account/password.html.twig', [
