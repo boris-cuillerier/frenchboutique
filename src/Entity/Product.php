@@ -100,6 +100,12 @@ class Product
         return $this;
     }
 
+    public function getPriceWt()
+    {
+        $coeff = $this->tva/100;
+        return $coeff * $this->price;
+    }
+
     public function getTva(): ?float
     {
         return $this->tva;
