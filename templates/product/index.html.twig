@@ -13,7 +13,7 @@
                     {{ product.description|raw }}
                 </div>
                 <span class="d-block mb-3 fw-bold">{{ product.pricewt|price }}</span>
-                <button class="btn btn-success w- mt-3">Ajouter à votre panier</button>
+                <a href={{ path('app_cart_add', { id : product.id }) }} class="btn btn-success w- mt-3">Ajouter à votre panier</a>
             </div>
         </div>
     </div>

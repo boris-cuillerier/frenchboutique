@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="container my-5">
+    <h1>Mon panier</h1>
+    <div class="col md-8">
+        Liste de mes Produits
+        {{ dump(cart) }}
+    </div>
+    <div class="col md-4">
+        Récap du panier
+    </div>
+    
+</div>
+{% endblock %}
