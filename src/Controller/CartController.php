@@ -31,4 +31,13 @@ final class CartController extends AbstractController
         ]);
     }
 
+    #[Route('/cart/remove', name: 'app_cart_remove')]
+    public function remove(Cart $cart): Response
+    {
+        
+        $cart->remove();
+
+        return $this->redirectToRoute('app_home');
+    }
+
 }
